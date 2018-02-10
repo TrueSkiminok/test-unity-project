@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 
 public class SnakeMovement : MonoBehaviour {
@@ -11,9 +13,13 @@ public class SnakeMovement : MonoBehaviour {
 
     public List<GameObject> tailObjects = new List<GameObject>();
 
-    public float zOffset = 0.5f;
+    public float zOffset = 0.01f;
 
     public GameObject tailPrefab;
+
+    public Text scoreText;
+
+    public int score = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +31,7 @@ public class SnakeMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        scoreText.text = score.ToString();
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
         if (Input.GetKey(KeyCode.D))
@@ -40,8 +47,8 @@ public class SnakeMovement : MonoBehaviour {
 
    public void AddTail()
     {
-         
 
+        score++;
         Vector3 newTailPosition = tailObjects[tailObjects.Count-1].transform.position;
         newTailPosition.z -= zOffset;
 
